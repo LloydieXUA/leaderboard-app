@@ -1,0 +1,77 @@
+/* responsive.css */
+/* Responsive Media Queries */
+@media (max-width: 1200px) {
+    .player-table {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .app {
+      width: 95%;
+      padding: 50px;
+    }
+    .top-player .entry {
+      padding: 20px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .player-table {
+      grid-template-columns: 1fr;
+    }
+    .app {
+      padding: 30px;
+      border-radius: 45px;
+    }
+    h1 {
+      font-size: 2.5em;
+    }
+    .add-player-form input {
+      width: 90%;
+    }
+    .top-player .entry {
+      padding: 15px;
+      border-radius: 10px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .app {
+      padding: 20px;
+    }
+    h1 {
+      font-size: 2em;
+    }
+    .add-player-form input {
+      width: 100%;
+    }
+    .player-image {
+      width: 60px;
+      height: 60px;
+    }
+    .player-info h2 {
+      font-size: 1.2em;
+    }
+    .entry {
+      flex-direction: column;
+      align-items: center;
+    }
+    .image-container {
+      margin-right: 0;
+      margin-bottom: 10px;
+    }
+    .popup,
+    .edit-modal,
+    .confirm-modal {
+      width: 90%;
+      padding: 15px;
+    }
+    .action-button {
+      margin-bottom: 10px;
+      width: 90%;
+    }
+    .buttons-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+  

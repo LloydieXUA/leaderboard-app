@@ -1,0 +1,32 @@
+/* global.css */
+/* Body Background and Global Styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #121212 
+      url("data:image/svg+xml;charset=UTF-8,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='50%25' y='50%25' font-size='48' fill='rgba(255,255,255,0.03)' text-anchor='middle' dominant-baseline='middle'%3EUA%3C/text%3E%3C/svg%3E") 
+      repeat;
+    background-size: 200px 200px;
+    background-image: 
+      radial-gradient(circle at center, rgba(255,255,255,0.02) 0%, transparent 70%);
+    background-blend-mode: overlay;
+    background-repeat: repeat;
+    color: white;
+    overflow: auto;
+    max-height: 90vh;
+  }
+  
+  /* Hide scrollbar for various browsers */
+  .app::-webkit-scrollbar {
+    display: none;
+  }
+  .app {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  

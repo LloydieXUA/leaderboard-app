@@ -1,0 +1,106 @@
+{
+  "name": "leaderboard-app",
+  "version": "0.1.0",
+  "private": true,
+  "main": "public/electron.js",
+  "author": "Lloyd Geofrey Arcilla",
+  "description": "A leaderboard app for TikTok anchors focused on tracking and visualizing their sales performance in real-time. This application provides a dynamic and engaging way to motivate anchors by showcasing their progress against peers. It offers clear and concise data presentation, allowing for quick identification of top performers and areas for improvement. The app aims to foster a competitive yet collaborative environment, encouraging anchors to strive for higher sales targets. Ultimately, it serves as a valuable tool for management to monitor team performance and identify successful strategies.",
+  "dependencies": {
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.2.0",
+    "@testing-library/user-event": "^13.5.0",
+    "framer-motion": "^12.4.10",
+    "lucide-react": "^0.479.0",
+    "pixi.js": "^8.8.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-icons": "^5.5.0",
+    "react-scripts": "5.0.1",
+    "three": "^0.174.0",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "electron": "electron .",
+    "electron:build": "electron-builder --mac"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "electron": "^35.1.4",
+    "electron-builder": "^23.6.0",
+    "pm2": "^5.4.3",
+    "electron-rebuild": "^3.2.8"
+  },
+  "build": {
+    "appId": "com.example.react-desktop",
+    "productName": "React Desktop App",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "**/*",
+      "!node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}",
+      "!**/.*",
+      "!*.md",
+      "build/**/*",
+      "public/electron.js"
+    ],
+    "mac": {
+      "category": "public.app-category.utilities",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "entitlements": "build/entitlements.mac.plist",
+      "entitlementsInherit": "build/entitlements.mac.inherit.plist",
+      "artifactName": "${productName}-${version}-${arch}.${ext}",
+      "extendInfo": {
+        "LSApplicationCategoryType": "public.app-category.utilities",
+        "CFBundleIdentifier": "$(PRODUCT_BUNDLE_IDENTIFIER)",
+        "CFBundleName": "$(PRODUCT_NAME)",
+        "CFBundleDisplayName": "$(PRODUCT_NAME)",
+        "CFBundleVersion": "${version}",
+        "CFBundleShortVersionString": "${version}",
+        "NSHumanReadableCopyright": "Copyright © 2025 Lloyd Geofrey Arcilla. All rights reserved."
+      },
+      "darkModeSupport": true
+    },
+    "dmg": {
+      "artifactName": "${productName}-${version}-${arch}.${ext}",
+      "background": "build/dmg/background.png",
+      "iconSize": 80,
+      "contents": [
+        {
+          "x": 100,
+          "y": 150,
+          "type": "file"
+        },
+        {
+          "x": 400,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        },
+        {
+        }
+      ]
+    }
+  }
+}

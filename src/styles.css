@@ -1,0 +1,442 @@
+/* 
+  1. BODY BACKGROUND 
+     - Repeats an SVG with 'UA' text
+     - Subtle radial gradient overlay for extra flair
+*/
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* Dark background plus repeated 'UA' text pattern */
+  background: #121212 
+    url("data:image/svg+xml;charset=UTF-8,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='50%25' y='50%25' font-size='48' fill='rgba(255,255,255,0.03)' text-anchor='middle' dominant-baseline='middle'%3EUA%3C/text%3E%3C/svg%3E") 
+    repeat;
+  background-size: 200px 200px;
+
+  /* Optional radial gradient overlay for extra depth */
+  background-image: 
+    radial-gradient(circle at center, rgba(255,255,255,0.02) 0%, transparent 70%);
+  background-blend-mode: overlay;
+  background-repeat: repeat;
+  color: white; /* Global text color */
+  overflow: auto;
+  max-height: 90vh;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.app::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.app {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* 
+  2. MAIN CONTAINER (.app)
+     - Neon glow effect around the box
+     - Subtle scaling on hover
+*/
+.app {
+  position: relative;
+  z-index: 1; /* ensure it’s above the background */
+  width: 1050px;
+  max-width: 90%;
+  padding: 100px;
+  background-color: rgba(30, 30, 30, 0.9); /* translucent dark background */
+  border-radius: 90px;
+  box-shadow: 0 0 40px rgba(255, 64, 129, 0.6);
+  text-align: center;
+  transition: transform 0.3s ease-in-out;
+  overflow: auto;
+  max-height: 90vh;
+}
+
+.app:hover {
+  transform: scale(1.02);
+}
+
+/* 
+  3. TITLE (H1)
+     - Gradient text for a futuristic vibe
+     - Increase letter spacing slightly
+*/
+h1 {
+  font-size: 3em;
+  margin-bottom: 20px;
+  letter-spacing: 2px;
+  color: #ff4081; /* Fallback color */
+  background: linear-gradient(90deg, #ff4081, #f36aff);
+  background-clip: text;         /* Standard property */
+  -webkit-background-clip: text; /* Vendor prefix for WebKit browsers */
+  -webkit-text-fill-color: transparent;
+}
+
+/* 
+  4. ADD-PLAYER FORM
+     - Smooth transitions
+     - Neon-like input focus
+*/
+.add-player-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.add-player-form input {
+  width: 80%;
+  padding: 12px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 5px;
+  background-color: #2a2a2a;
+  color: pink;
+  font-size: 1em;
+  transition: border-color 0.3s ease-in-out;
+}
+
+.add-player-form input:focus {
+  outline: none;
+  border: 2px solid #ff4081;
+  box-shadow: 0 0 10px rgba(255, 64, 129, 0.5);
+}
+
+.add-player-form button {
+  padding: 12px 24px;
+  margin-top: 5px;
+  border: none;
+  border-radius: 5px;
+  background-color: #ff4081;
+  color: white;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.add-player-form button:hover {
+  background-color: #e91e63;
+  transform: scale(1.05);
+}
+
+/* 
+  5. LEADERBOARD CONTAINER
+*/
+.leaderboard {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 
+  6. TOP-PLAYER 
+*/
+.top-player {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.top-player .entry {
+  max-width: 920px;
+  margin: 0 auto;
+  border: 2px solid #ff4081; 
+  box-shadow: 0 0 20px rgba(255,64,129,0.8);
+  padding: 40px;
+}
+
+/* 
+  7. PLAYER TABLE (initially 1 column)
+*/
+.player-table {
+  display: grid;
+  grid-template-columns: 1fr; /* one column layout */
+  gap: 30px;
+  width: 100%;
+  max-width: 600px; /* adjust as needed */
+  margin: 0 auto;
+}
+
+/* 
+  8. ENTRY CARD
+*/
+.entry {
+  background-color: #1e1e1e;
+  border-radius: 20px;
+  padding: 25px;
+  margin: 0; /* grid gap handles spacing */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.entry:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 10px rgba(255, 64, 129, 0.5);
+}
+
+/* 
+  9. IMAGE CONTAINER & PLAYER IMAGE
+*/
+.image-container {
+  position: relative;
+  display: inline-block;
+  margin-right: 15px;
+}
+
+.player-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 3px solid white;
+  cursor: pointer;
+  display: block;
+}
+
+.player-info {
+  text-align: center;
+  flex: 1;
+  margin: 0 10px;
+}
+
+.player-info h2 {
+  font-size: 1.5em;
+  margin: 0 0 10px 0;
+}
+
+.player-info p {
+  margin: 5px 0;
+  font-size: 1em;
+}
+
+/* 
+  10. Number Inputs
+*/
+input[type="number"] {
+  width: 80px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #2a2a2a;
+  color: white;
+  text-align: center;
+}
+
+input[type="number"]:focus {
+  outline: none;
+  border-color: #ff4081;
+  box-shadow: 0 0 10px rgba(255, 64, 129, 0.5);
+}
+
+/* 
+  11. Fire animation 
+*/
+@keyframes fire {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.8; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.fire-animation {
+  animation: fire 1s infinite alternate;
+  box-shadow: 0 0 20px rgba(255, 165, 0, 0.7),
+              0 0 30px rgba(255, 0, 0, 0.5);
+  border: 3px solid rgba(255, 165, 0, 0.8);
+}
+
+/* 
+  12. Sort & Action Buttons
+*/
+.sort-button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 5px;
+  background-color: #ff4081;
+  color: white;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s ease-in-out, transform 0.2s;
+  margin: 5px;
+}
+
+.sort-button:hover {
+  background-color: #e91e63;
+  transform: scale(1.05);
+}
+
+.buttons-container {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.action-button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 5px;
+  background-color: #ff4081;  /* Same pink background as Add Player and Sort buttons */
+  color: white;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s ease-in-out, transform 0.2s;
+  margin-right: 10px;
+}
+
+.action-button:last-child {
+  margin-right: 0;
+}
+
+.action-button:hover {
+  background-color: #e91e63;
+  transform: scale(1.05);
+}
+
+/* 
+  13. Claim Reward Button
+*/
+.claim-reward-button {
+  background: linear-gradient(45deg, #f39c12, #e67e22);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+  margin-top: 10px;
+}
+
+.claim-reward-button:hover {
+  background: linear-gradient(45deg, #e67e22, #d35400);
+  transform: scale(1.05);
+}
+
+.claim-reward-button:active {
+  transform: scale(0.98);
+}
+
+/* 
+  14. Popup & Modal styles (generic)
+*/
+.popup,
+.edit-modal,
+.confirm-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #1e1e1e;
+  border: 2px solid #ff4081;
+  border-radius: 10px;
+  padding: 25px;
+  z-index: 100;
+  text-align: center;
+}
+
+.popup button,
+.edit-modal button,
+.confirm-modal button {
+  margin: 8px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  background-color: #ff4081;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.popup button:hover,
+.edit-modal button:hover,
+.confirm-modal button:hover {
+  background-color: #e91e63;
+}
+
+/* 
+  15. Responsive Media Queries
+*/
+@media (max-width: 1200px) {
+  .player-table {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns */
+  }
+  .app {
+    width: 95%;
+    padding: 50px;
+  }
+  .top-player .entry {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .player-table {
+    grid-template-columns: 1fr; /* Stack to one column */
+  }
+  .app {
+    padding: 30px;
+    border-radius: 45px; /* less rounded */
+  }
+  h1 {
+    font-size: 2.5em;
+  }
+  .add-player-form input {
+    width: 90%;
+  }
+  .top-player .entry {
+    padding: 15px;
+    border-radius: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .app {
+    padding: 20px;
+  }
+  h1 {
+    font-size: 2em; /* Smaller title */
+  }
+  .add-player-form input {
+    width: 100%; /* Full width */
+  }
+  .player-image {
+    width: 60px;
+    height: 60px;
+  }
+  .player-info h2 {
+    font-size: 1.2em;
+  }
+  .entry {
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center items */
+  }
+  .image-container {
+    margin-right: 0; /* Remove margin*/
+    margin-bottom: 10px; /* Add space below*/
+  }
+  .popup,
+  .edit-modal,
+  .confirm-modal {
+    width: 90%;
+    padding: 15px;
+  }
+  .action-button {
+    margin-bottom: 10px;
+    width: 90%;
+  }
+  .buttons-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}

@@ -1,0 +1,35 @@
+/* modals.css */
+/* Popup, Edit, and Confirm Modals */
+.popup,
+.edit-modal,
+.confirm-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #1e1e1e;
+  border: 2px solid #ff4081;
+  border-radius: 10px;
+  padding: 25px;
+  z-index: 100;
+  text-align: center;
+}
+
+.popup button,
+.edit-modal button,
+.confirm-modal button {
+  margin: 8px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  background-color: #ff4081;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.popup button:hover,
+.edit-modal button:hover,
+.confirm-modal button:hover {
+  background-color: #e91e63;
+}

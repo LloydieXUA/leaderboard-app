@@ -1,0 +1,13 @@
+/* typography.css */
+/* Title (H1) Styling */
+h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+    color: #ff4081; /* Fallback color */
+    background: linear-gradient(90deg, #ff4081, #f36aff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  

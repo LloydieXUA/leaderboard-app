@@ -1,0 +1,21 @@
+/* layout.css */
+/* Main Container (.app) */
+.app {
+    position: relative;
+    z-index: 1;
+    width: 1050px;
+    max-width: 90%;
+    padding: 100px;
+    background-color: rgba(30, 30, 30, 0.9);
+    border-radius: 90px;
+    box-shadow: 0 0 40px rgba(255, 64, 129, 0.6);
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+    overflow: auto;
+    max-height: 90vh;
+  }
+  
+  .app:hover {
+    transform: scale(1.02);
+  }
+  
