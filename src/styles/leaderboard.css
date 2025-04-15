@@ -109,14 +109,6 @@
     transition: transform 0.3s ease-in-out;
   }
   
-  .top-player {
-    border: 2px solid;
-    border-image: linear-gradient(to right, gold, #ffd700, gold) 1;
-    animation: border-gradient 5s linear infinite;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), inset 0 0 10px rgba(255, 215, 0, 0.4);
-    transition: box-shadow 0.3s ease-in-out;
-  }
-  
   .top-player:hover {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4), inset 0 0 15px rgba(255, 215, 0, 0.6);
   }
