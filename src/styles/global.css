@@ -13,12 +13,12 @@ body {
       repeat;
     background-size: 200px 200px;
     background-image: 
-      radial-gradient(circle at center, rgba(255,255,255,0.02) 0%, transparent 70%);
+      radial-gradient(circle at center, rgba(255,255,255,0.02) 0%, transparent 100%);
     background-blend-mode: overlay;
     background-repeat: repeat;
     color: white;
-    overflow: auto;
-    max-height: 90vh;
+    overflow: hidden;
+    max-height: 100vh;
   }
   
   /* Hide scrollbar for various browsers */
