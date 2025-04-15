@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import RewardModal from './RewardModal';
 import LeaderboardEntry from './LeaderboardEntry';
 import '../styles/global.css';
@@ -11,51 +11,13 @@ import '../styles/buttons.css';
 import '../styles/modals.css';
 import '../styles/responsive.css';
 
-const getBadge = (sales) => {
-  if (sales >= 1000) {
-    return { badge: 'Platinum', reward: 'Brand New iPhone 15' };
-  } else if (sales >= 700) {
-    return { badge: 'Gold', reward: null };
-  } else if (sales >= 500) {
-    return { badge: 'Silver', reward: null };
-  } else if (sales >= 400) {
-    return { badge: 'Bronze', reward: null };
-  }
-  return { badge: null, reward: null };
-};
-
-const Leaderboard = ({ players, updateSales, deletePlayer }) => {
-  const [sortedPlayers, setSortedPlayers] = useState(players);
-  const [showCommission, setShowCommission] = useState(false);
+const Leaderboard = ({ players, updateSales, deletePlayer, showPayout }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
 
-  // Sync sortedPlayers with parent players when they change.
-  useEffect(() => {
-    setSortedPlayers(players);
-  }, [players]);
-
-  // Sort players based on the selected criteria.
-  const sortPlayers = (criteria) => {
-    const sorted = [...sortedPlayers].sort((a, b) => {
-      if (criteria === 'sales') {
-        return b.sales - a.sales;
-      } else if (criteria === 'name') {
-        return a.name.localeCompare(b.name);
-      }
-      return 0;
-    });
-    setSortedPlayers(sorted);
-  };
-
-  const toggleCommission = () => {
-    setShowCommission(prev => !prev);
-  };
-
   const handleShowReward = (player) => {
-    if (player.sales >= 1000) {
-      const { reward } = getBadge(player.sales);
-      setModalMessage(`Congratulations ${player.name}! You reached 1000 sales and you won a ${reward}.`);
+    if (player.sales >= 550) {
+      setModalMessage(`Congratulations ${player.name}! You won a Iphone 15 Pro Max.`);
       setModalVisible(true);
     }
   };
@@ -64,9 +26,8 @@ const Leaderboard = ({ players, updateSales, deletePlayer }) => {
     setModalVisible(false);
   };
 
-  // Compute rankings: players with equal sales share the same rank.
-  const rankedPlayers = sortedPlayers
-    .slice() // create a shallow copy
+  const rankedPlayers = players
+    .slice()
     .sort((a, b) => b.sales - a.sales)
     .reduce((acc, player, index) => {
       if (index === 0) {
@@ -87,19 +48,6 @@ const Leaderboard = ({ players, updateSales, deletePlayer }) => {
 
   return (
     <div>
-      {/* Sort and Commission Toggle Buttons */}
-      <div>
-        <button className="sort-button" onClick={() => sortPlayers('sales')}>
-          Sort by Sales
-        </button>
-        <button className="sort-button" onClick={() => sortPlayers('name')}>
-          Sort by Name
-        </button>
-        <button className="sort-button" onClick={toggleCommission}>
-          {showCommission ? 'Hide Commission' : 'Show Commission'}
-        </button>
-      </div>
-      
       {/* Top Player */}
       <div className="top-player">
         {topPlayer && (
@@ -109,9 +57,9 @@ const Leaderboard = ({ players, updateSales, deletePlayer }) => {
               index={0} 
               updateSales={updateSales} 
               deletePlayer={deletePlayer} 
-              showCommission={showCommission}
+              showPayout={showPayout}
             />
-            {topPlayer.sales >= 1000 && (
+            {topPlayer.sales >= 550 && (
               <button 
                 className="claim-reward-button"
                 onClick={() => handleShowReward(topPlayer)}
@@ -123,7 +71,7 @@ const Leaderboard = ({ players, updateSales, deletePlayer }) => {
         )}
       </div>
       
-      {/* Other Players (One Column Layout) */}
+      {/* Other Players */}
       <div className="player-table">
         {otherPlayers.map((player, index) => (
           <div key={player.id}>
@@ -132,9 +80,9 @@ const Leaderboard = ({ players, updateSales, deletePlayer }) => {
               index={index + 1} 
               updateSales={updateSales} 
               deletePlayer={deletePlayer} 
-              showCommission={showCommission}
+              showPayout={showPayout}
             />
-            {player.sales >= 1000 && (
+            {player.sales >= 550 && (
               <button 
                 className="claim-reward-button"
                 onClick={() => handleShowReward(player)}
