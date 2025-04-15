@@ -46,7 +46,7 @@ const images = {
   'Test 15': test15,
 };
 
-const LeaderboardEntry = ({ player, index, updateSales, deletePlayer, showCommission }) => {
+const LeaderboardEntry = ({ player, index, updateSales, deletePlayer, showPayout }) => {
   const [showPopup, setShowPopup] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
   const [editMode, setEditMode] = useState(false);
@@ -55,8 +55,8 @@ const LeaderboardEntry = ({ player, index, updateSales, deletePlayer, showCommis
   const soundRef = useRef(null);
 
   const getBackgroundColor = () => {
-    if (player.sales >= 700) return 'gold';
-    if (player.sales >= 600) return 'silver';
+    if (player.sales >= 550) return 'gold';
+    if (player.sales >= 530) return 'silver';
     if (player.sales >= 500) return '#cd7f32';
     if (index >= 9 && index <= 14) return 'rgba(255, 0, 0, 0.2)';
     return 'transparent';
@@ -141,11 +141,30 @@ const LeaderboardEntry = ({ player, index, updateSales, deletePlayer, showCommis
           {player.name}
         </h2>
         <p style={{ color: textColor, margin: '5px 0' }}>
+          Level: {player.level}
+        </p>
+        <p style={{ color: textColor, margin: '5px 0' }}>
           Sales: {player.sales}
         </p>
-        {showCommission && (
-          <p style={{ color: textColor, fontSize: '1.2em', margin: '5px 0' }}>
-            Commission: {player.commission.toLocaleString('en-PH', { style: 'currency', currency: 'PHP' })}
+        {showPayout && (
+          <>
+            <p style={{ color: textColor, margin: '5px 0' }}>
+              Salary: {player.salary.toLocaleString('en-PH', { style: 'currency', currency: 'PHP' })}
+            </p>
+            <p style={{ color: textColor, margin: '5px 0' }}>
+              Commission per Shirt: {player.commissionPerShirt.toLocaleString('en-PH', { style: 'currency', currency: 'PHP' })}
+            </p>
+            <p style={{ color: textColor, margin: '5px 0' }}>
+              Total Commission: {player.totalCommission.toLocaleString('en-PH', { style: 'currency', currency: 'PHP' })}
+            </p>
+            <p style={{ color: textColor, margin: '5px 0' }}>
+              Total Income: {player.totalIncome.toLocaleString('en-PH', { style: 'currency', currency: 'PHP' })}
+            </p>
+          </>
+        )}
+        {player.sales >= 550 && (
+          <p style={{ color: 'gold', fontWeight: 'bold', margin: '5px 0' }}>
+            Reward: iPhone 15 Pro Max
           </p>
         )}
       </div>
