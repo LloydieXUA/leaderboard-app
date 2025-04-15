@@ -303,29 +303,7 @@ input[type="number"]:focus {
 }
 
 /* 
-  13. Claim Reward Button
-*/
-.claim-reward-button {
-  background: linear-gradient(45deg, #f39c12, #e67e22);
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
-  margin-top: 10px;
-}
-
-.claim-reward-button:hover {
-  background: linear-gradient(45deg, #e67e22, #d35400);
-  transform: scale(1.05);
-}
-
-.claim-reward-button:active {
-  transform: scale(0.98);
-}
-
+  
 /* 
   14. Popup & Modal styles (generic)
 */
