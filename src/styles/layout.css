@@ -3,19 +3,26 @@
 .app {
     position: relative;
     z-index: 1;
-    width: 1050px;
-    max-width: 90%;
-    padding: 100px;
+    width: 150%;
+    max-width: 150%;
+    padding: 20px; /* Further reduce padding */
     background-color: rgba(30, 30, 30, 0.9);
-    border-radius: 90px;
-    box-shadow: 0 0 40px rgba(255, 64, 129, 0.6);
+    border-radius: 20px; /* Smaller border radius */
+    box-shadow: 0 0 100px rgba(255, 64, 129, 0.6);
     text-align: center;
     transition: transform 0.3s ease-in-out;
-    overflow: auto;
-    max-height: 90vh;
-  }
-  
-  .app:hover {
+    overflow: hidden; /* Remove scroll bar */
+    max-height: 90vh; /* Ensure it fits within the viewport */
+    height: 85vh; /* Set height to viewport height */
+    margin: 0; /* Remove any margin that might cause overflow */
+}
+
+/* Remove scroll bar from the body */
+body {
+    margin: 0; /* Remove default margin */
+    overflow: hidden; /* Prevent scroll bar on the entire page */
+}
+
+.app:hover {
     transform: scale(1.02);
-  }
-  
+}
