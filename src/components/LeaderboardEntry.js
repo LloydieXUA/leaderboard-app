@@ -19,12 +19,6 @@ import CRYSTAL from '../images/CRYSTAL.jpg';
 import LEAH from '../images/LEAH.jpg';
 import QUEEN from '../images/QUEEN.jpg';
 import SAMMY from '../images/SAMMY.jpg';
-import test10 from '../images/test10.jpg';
-import test11 from '../images/test11.jpg';
-import test12 from '../images/test12.jpg';
-import test13 from '../images/test13.jpg';
-import test14 from '../images/test14.jpg';
-import test15 from '../images/test15.jpg';
 import jackpotSound from '../sounds/jackpot.mp3';
 
 const images = {
@@ -37,13 +31,7 @@ const images = {
   'CRYSTAL': CRYSTAL,
   'LEAH': LEAH,
   'QUEEN': QUEEN,
-  'SAMMY ': SAMMY,
-  'Test 10': test10,
-  'Test 11': test11,
-  'Test 12': test12,
-  'Test 13': test13,
-  'Test 14': test14,
-  'Test 15': test15,
+  'SAMMY': SAMMY
 };
 
 const LeaderboardEntry = ({ player, index, updateSales, deletePlayer, showPayout }) => {
