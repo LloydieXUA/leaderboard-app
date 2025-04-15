@@ -17,8 +17,8 @@ import WINRAD from '../images/WINRAD.jpg';
 import JUDY from '../images/JUDY.jpg';
 import CRYSTAL from '../images/CRYSTAL.jpg';
 import LEAH from '../images/LEAH.jpg';
-import SHEIAN from '../images/SHEIAN.jpg';
-import test9 from '../images/test9.jpg';
+import QUEEN from '../images/QUEEN.jpg';
+import SAMMY from '../images/SAMMY.jpg';
 import test10 from '../images/test10.jpg';
 import test11 from '../images/test11.jpg';
 import test12 from '../images/test12.jpg';
@@ -36,8 +36,8 @@ const images = {
   'JUDY': JUDY,
   'CRYSTAL': CRYSTAL,
   'LEAH': LEAH,
-  'SHEIAN': SHEIAN,
-  'Test 9': test9,
+  'QUEEN': QUEEN,
+  'SAMMY ': SAMMY,
   'Test 10': test10,
   'Test 11': test11,
   'Test 12': test12,
