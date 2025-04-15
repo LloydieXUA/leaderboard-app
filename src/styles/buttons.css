@@ -54,55 +54,48 @@
   margin-right: 0;
 }
 
-/* Claim Reward Button */
+/* Claim Reward Button (inside player container) */
 .claim-reward-button {
-  width: 100%; /* Full-width button */
-  max-width: 600px; /* Optional: Set a max-width */
-  margin: 20px auto; /* Center the button */
-  display: block; /* Make it a block-level element */
-  background: linear-gradient(135deg, #f39c12, #e67e22);
-  color: #fff;
-  border: none;
-  border-radius: 16px; /* More rounded corners */
-  padding: 20px 40px; /* Larger padding */
-  font-weight: 800;
-  font-size: 1.4em; /* Larger font size */
+  display: inline-block;
+  background: none; /* Remove background box */
+  color: #ffd700; /* Gold text to match the container */
+  border: none; /* Remove border */
+  font-size: 1em; /* Standard font size */
+  font-weight: bold;
   cursor: pointer;
-  transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55), box-shadow 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55), filter 0.3s ease-in-out;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  padding: 0; /* Remove padding */
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+  margin-top: 10px; /* Add spacing within the container */
   position: relative;
-  overflow: hidden;
   z-index: 1;
-  filter: grayscale(0);
-}
-
-.claim-reward-button::before {
-  content: '';
-  position: absolute;
-  top: -60%;
-  left: -60%;
-  width: 220%;
-  height: 220%;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.5), transparent);
-  transform: rotate(-45deg);
-  transition: transform 0.7s linear;
-  animation: cosmic-pulse 10s linear infinite;
-  z-index: -1;
-}
-
-.claim-reward-button:hover::before {
-  transform: rotate(0deg);
 }
 
 .claim-reward-button:hover {
-  transform: translateY(-8px) scale(1.1) perspective(700px) rotateY(10deg) rotateX(6deg);
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.6);
-  filter: grayscale(0.2);
+  color: #ffcc33; /* Slightly brighter gold on hover */
+  text-shadow: 0 0 5px rgba(255, 204, 51, 0.8); /* Glow effect on hover */
 }
 
 .claim-reward-button:active {
-  transform: translateY(4px) scale(0.94);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+  transform: scale(0.95); /* Slightly shrink on click */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduced shadow on click */
+}
+
+/* Ensure the button blends seamlessly with the container */
+.player-container {
+  width: 100%; /* Full width */
+  background: linear-gradient(135deg, #ffd700, #ffcc33); /* Gold gradient */
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  position: relative;
+}
+
+.player-container .claim-reward-button {
+  display: inline-block;
+  margin-top: 10px; /* Add spacing for the button */
+  margin: 0 auto; /* Center the button within the container */
 }
 
 @keyframes pulse-shine {
@@ -115,4 +108,78 @@
   0% { transform: rotate(-45deg) scale(1); filter: brightness(1); }
   50% { transform: rotate(45deg) scale(1.3); filter: brightness(1.2); }
   100% { transform: rotate(-45deg) scale(1); filter: brightness(1); }
+}
+
+.toggle-button {
+  margin: 20px auto;
+  display: block;
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  color: white;
+  font-size: 1.2em;
+  padding: 10px 20px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.toggle-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.controls {
+  margin-top: 20px;
+}
+
+.tiny-toggle-button {
+  position: absolute;
+  top: 15px; /* Adjusted for better visibility */
+  right: 15px; /* Adjusted for better visibility */
+  width: 20px; /* Slightly larger for visibility */
+  height: 20px; /* Slightly larger for visibility */
+  background-color: #000000; /* A more noticeable blue color */
+  border: 2px solid rgb(23, 21, 21); /* Add a white border for contrast */
+  border-radius: 50%; /* Circular shape */
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Slight shadow for depth */
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.tiny-toggle-button:hover {
+  transform: scale(1.3); /* Slightly larger on hover */
+  background-color: #010810; /* Darker blue on hover */
+}
+
+.collapsible-header {
+  text-align: center;
+  font-size: 2.5em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.3s ease;
+  background: linear-gradient(90deg, #ff4081, #f50057);
+  -webkit-background-clip: text;
+  background-clip: text; /* Add standard property for compatibility */
+  -webkit-text-fill-color: transparent;
+}
+
+.collapsible-header:hover {
+  transform: scale(1.05);
+  color: #ff4081;
+}
+
+.collapsible-header.collapsed {
+  transform: rotateX(360deg);
+  opacity: 0.8;
+}
+
+.controls-container {
+  overflow: hidden;
+  transition: max-height 0.5s ease, opacity 0.5s ease;
+  max-height: 1000px; /* Default expanded height */
+  opacity: 1;
+}
+
+.controls-container.collapsed {
+  max-height: 0;
+  opacity: 0;
 }
