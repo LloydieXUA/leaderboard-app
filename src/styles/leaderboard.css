@@ -28,18 +28,20 @@
   /* Player Table */
   .player-table {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 30px;
+    grid-template-columns: 1fr; /* Always one column */
+    gap: 10px; /* Reduce gap between entries */
     width: 100%;
     max-width: 600px;
     margin: 0 auto;
+    overflow-y: auto; /* Allow scrolling if needed */
+    max-height: calc(100vh - 150px); /* Ensure it fits within the viewport */
   }
   
   /* Entry Card */
   .entry {
     background-color: #1e1e1e;
-    border-radius: 20px;
-    padding: 25px;
+    border-radius: 10px; /* Smaller border radius */
+    padding: 10px; /* Reduce padding */
     margin: 0;
     display: flex;
     align-items: center;
