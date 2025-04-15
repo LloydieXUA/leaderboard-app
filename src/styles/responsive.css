@@ -2,53 +2,53 @@
 /* Responsive Media Queries */
 @media (max-width: 1200px) {
     .player-table {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: 1fr; /* Always one column */
     }
     .app {
       width: 95%;
-      padding: 50px;
+      padding: 15px; /* Further reduce padding */
     }
     .top-player .entry {
-      padding: 20px;
+      padding: 15px; /* Reduce padding */
     }
   }
   
   @media (max-width: 768px) {
     .player-table {
-      grid-template-columns: 1fr;
+      grid-template-columns: 1fr; /* Always one column */
     }
     .app {
-      padding: 30px;
-      border-radius: 45px;
+      padding: 10px; /* Further reduce padding */
+      border-radius: 30px; /* Smaller border radius */
     }
     h1 {
-      font-size: 2.5em;
+      font-size: 1.8em; /* Adjust font size */
     }
     .add-player-form input {
       width: 90%;
     }
     .top-player .entry {
-      padding: 15px;
+      padding: 10px; /* Reduce padding */
       border-radius: 10px;
     }
   }
   
   @media (max-width: 480px) {
     .app {
-      padding: 20px;
+      padding: 5px; /* Further reduce padding */
     }
     h1 {
-      font-size: 2em;
+      font-size: 1.5em; /* Adjust font size */
     }
     .add-player-form input {
       width: 100%;
     }
     .player-image {
-      width: 60px;
-      height: 60px;
+      width: 50px; /* Smaller image size */
+      height: 50px;
     }
     .player-info h2 {
-      font-size: 1.2em;
+      font-size: 1em; /* Adjust font size */
     }
     .entry {
       flex-direction: column;
@@ -56,17 +56,20 @@
     }
     .image-container {
       margin-right: 0;
-      margin-bottom: 10px;
+      margin-bottom: 5px;
     }
     .popup,
     .edit-modal,
     .confirm-modal {
       width: 90%;
-      padding: 15px;
+      padding: 10px; /* Reduce padding */
     }
     .action-button {
-      margin-bottom: 10px;
+      margin-bottom: 5px; /* Reduce margin */
       width: 90%;
+    }
+    .player-table {
+      max-height: calc(100vh - 100px); /* Ensure it fits within the viewport */
     }
     .buttons-container {
       display: flex;
@@ -74,4 +77,3 @@
       align-items: center;
     }
   }
-  
