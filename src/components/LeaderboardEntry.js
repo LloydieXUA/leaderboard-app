@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import '../styles/global.css';
 import '../styles/layout.css';
@@ -9,7 +9,6 @@ import '../styles/animations.css';
 import '../styles/buttons.css';
 import '../styles/modals.css';
 import '../styles/responsive.css';
-import RHYJY from '../images/RHYJY.jpg';
 import ANTON from '../images/ANTON.jpg';
 import SYRUS from '../images/SYRUS.jpg';
 import IVY from '../images/IVY.jpg';
@@ -17,21 +16,16 @@ import WINRAD from '../images/WINRAD.jpg';
 import JUDY from '../images/JUDY.jpg';
 import CRYSTAL from '../images/CRYSTAL.jpg';
 import LEAH from '../images/LEAH.jpg';
-import QUEEN from '../images/QUEEN.jpg';
-import SAMMY from '../images/SAMMY.jpg';
-import jackpotSound from '../sounds/jackpot.mp3';
+
 
 const images = {
-  'RHYJY': RHYJY,
   'ANTON': ANTON,
   'SYRUS': SYRUS,
   'IVY': IVY,
   'WINRAD': WINRAD,
   'JUDY': JUDY,
   'CRYSTAL': CRYSTAL,
-  'LEAH': LEAH,
-  'QUEEN': QUEEN,
-  'SAMMY': SAMMY
+  'LEAH': LEAH
 };
 
 const LeaderboardEntry = ({ player, index, updateSales, deletePlayer, showPayout }) => {
@@ -40,7 +34,6 @@ const LeaderboardEntry = ({ player, index, updateSales, deletePlayer, showPayout
   const [editMode, setEditMode] = useState(false);
   const [editedName, setEditedName] = useState(player.name);
   const [editedSales, setEditedSales] = useState(player.sales);
-  const soundRef = useRef(null);
 
   const getBackgroundColor = () => {
     if (player.sales >= 550) return 'gold';
@@ -72,29 +65,14 @@ const LeaderboardEntry = ({ player, index, updateSales, deletePlayer, showPayout
     setEditMode(false);
   };
 
-  useEffect(() => {
-    if (index === 0 && player.sales > 1000) {
-      let playCount = 0;
-      const playSound = () => {
-        if (playCount < 5) {
-          soundRef.current.play();
-          playCount++;
-          soundRef.current.addEventListener('loadedmetadata', () => {
-            setTimeout(playSound, soundRef.current.duration * 1000);
-          });
-        }
-      };
-      soundRef.current.addEventListener('loadedmetadata', () => {
-        playSound();
-      });
-    }
-  }, [index, player.sales]);
+  const totalSales = (player.preSales || 0) + (player.sales || 0);
 
   return (
     <motion.div
-      className={`entry ${index === 0 ? 'top-player' : ''}`}
+      className={`entry${index === 0 ? ' top-player' : ''}`}
       style={{ 
         backgroundColor: getBackgroundColor(),
+        color: textColor,
         position: 'relative', 
         padding: '25px', 
         margin: '15px', 
@@ -109,10 +87,9 @@ const LeaderboardEntry = ({ player, index, updateSales, deletePlayer, showPayout
       exit={{ opacity: 0, y: 20 }}
       transition={{ duration: 0.3 }}
     >
-      <audio ref={soundRef} src={jackpotSound} />
       <div className="image-container">
         <img 
-          src={images[player.name] || 'https://via.placeholder.com/150'} 
+          src={images[player.name] || 'https://via.placeholder.com/100'} 
           alt={player.name} 
           className="player-image"
           onClick={() => setShowPopup(true)}
@@ -132,7 +109,10 @@ const LeaderboardEntry = ({ player, index, updateSales, deletePlayer, showPayout
           Level: {player.level}
         </p>
         <p style={{ color: textColor, margin: '5px 0' }}>
-          Sales: {player.sales}
+          Pre-Sales: {player.preSales || 0}
+        </p>
+        <p style={{ color: textColor, margin: '5px 0' }}>
+          Sales: {totalSales}
         </p>
         {showPayout && (
           <>
@@ -149,11 +129,6 @@ const LeaderboardEntry = ({ player, index, updateSales, deletePlayer, showPayout
               Total Income: {player.totalIncome.toLocaleString('en-PH', { style: 'currency', currency: 'PHP' })}
             </p>
           </>
-        )}
-        {player.sales >= 550 && (
-          <p style={{ color: 'gold', fontWeight: 'bold', margin: '5px 0' }}>
-            Reward: iPhone 15 Pro Max
-          </p>
         )}
       </div>
 
