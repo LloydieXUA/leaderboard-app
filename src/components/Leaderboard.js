@@ -15,11 +15,10 @@ const Leaderboard = ({ players, updateSales, deletePlayer, showPayout }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
 
+  // Only top player with 930+ sales can claim reward
   const handleShowReward = (player) => {
-    if (player.sales >= 550) {
-      setModalMessage(`Congratulations ${player.name}! You won a Iphone 15 Pro Max.`);
-      setModalVisible(true);
-    }
+    setModalMessage(`Congratulations ${player.name}! You won the Honda Click 125cc Fi.`);
+    setModalVisible(true);
   };
 
   const handleCloseModal = () => {
@@ -28,16 +27,22 @@ const Leaderboard = ({ players, updateSales, deletePlayer, showPayout }) => {
 
   const rankedPlayers = players
     .slice()
-    .sort((a, b) => b.sales - a.sales)
+    .sort((a, b) => {
+      // Sort by total sales (preSales + sales)
+      const totalA = (a.preSales || 0) + (a.sales || 0);
+      const totalB = (b.preSales || 0) + (b.sales || 0);
+      return totalB - totalA;
+    })
     .reduce((acc, player, index) => {
+      const totalSales = (player.preSales || 0) + (player.sales || 0);
       if (index === 0) {
-        acc.push({ ...player, rank: 1 });
+        acc.push({ ...player, rank: 1, totalSales });
       } else {
         const lastPlayer = acc[acc.length - 1];
-        if (player.sales === lastPlayer.sales) {
-          acc.push({ ...player, rank: lastPlayer.rank });
+        if (totalSales === lastPlayer.totalSales) {
+          acc.push({ ...player, rank: lastPlayer.rank, totalSales });
         } else {
-          acc.push({ ...player, rank: index + 1 });
+          acc.push({ ...player, rank: index + 1, totalSales });
         }
       }
       return acc;
@@ -45,6 +50,9 @@ const Leaderboard = ({ players, updateSales, deletePlayer, showPayout }) => {
 
   const topPlayer = rankedPlayers[0];
   const otherPlayers = rankedPlayers.slice(1);
+
+  // Show Honda Click if total sales (preSales + sales) >= 930
+  const canClaimHonda = topPlayer && topPlayer.totalSales >= 930;
 
   return (
     <div>
@@ -59,12 +67,12 @@ const Leaderboard = ({ players, updateSales, deletePlayer, showPayout }) => {
               deletePlayer={deletePlayer} 
               showPayout={showPayout}
             />
-            {topPlayer.sales >= 550 && (
+            {canClaimHonda && (
               <button 
                 className="claim-reward-button"
                 onClick={() => handleShowReward(topPlayer)}
               >
-                Claim Reward
+                Claim Honda Click 125cc Fi
               </button>
             )}
           </>
@@ -72,25 +80,23 @@ const Leaderboard = ({ players, updateSales, deletePlayer, showPayout }) => {
       </div>
       
       {/* Other Players */}
-      <div className="player-table">
+      <div
+        className="player-table"
+        style={{
+          maxHeight: '60vh',
+          overflowY: 'auto',
+          paddingRight: 8
+        }}
+      >
         {otherPlayers.map((player, index) => (
-          <div key={player.id}>
-            <LeaderboardEntry 
-              player={player} 
-              index={index + 1} 
-              updateSales={updateSales} 
-              deletePlayer={deletePlayer} 
-              showPayout={showPayout}
-            />
-            {player.sales >= 550 && (
-              <button 
-                className="claim-reward-button"
-                onClick={() => handleShowReward(player)}
-              >
-                Claim Reward
-              </button>
-            )}
-          </div>
+          <LeaderboardEntry
+            key={player.id}
+            player={player}
+            index={index + 1}
+            updateSales={updateSales}
+            deletePlayer={deletePlayer}
+            showPayout={showPayout}
+          />
         ))}
       </div>
       
