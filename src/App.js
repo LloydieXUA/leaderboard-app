@@ -11,16 +11,49 @@ import './styles/buttons.css';
 import './styles/modals.css';
 import './styles/responsive.css';
 
-const calculateCommissionAndSalary = (sales) => {
-  if (sales >= 550) return { level: 'Very Elite', salary: 15000, commissionPerShirt: 40, quota: 550 };
-  if (sales >= 530) return { level: 'Elite', salary: 14000, commissionPerShirt: 35, quota: 530 };
-  if (sales >= 500) return { level: 'Pro', salary: 13000, commissionPerShirt: 35, quota: 500 };
-  if (sales >= 450) return { level: 'Semi-Pro', salary: 12500, commissionPerShirt: 30, quota: 450 };
-  if (sales >= 400) return { level: 'Rising Star', salary: 12000, commissionPerShirt: 30, quota: 400 };
-  if (sales >= 350) return { level: 'Star', salary: 11500, commissionPerShirt: 25, quota: 350 };
-  if (sales >= 300) return { level: 'Closer', salary: 10000, commissionPerShirt: 25, quota: 300 };
-  if (sales >= 200) return { level: 'Rookie', salary: 5000, commissionPerShirt: 0, quota: 200 };
-  return { level: 'Rookie', salary: 5000, commissionPerShirt: 0, quota: 200 }; // Default for less than 200 sales
+const metrics = [
+  { level: 'Alpha', salary: 24000, commissionPerShirt: 40, quota: 930 },
+  { level: 'Elite', salary: 22000, commissionPerShirt: 40, quota: 850 },
+  { level: 'Closer', salary: 21000, commissionPerShirt: 40, quota: 800 },
+  { level: 'Pro', salary: 19000, commissionPerShirt: 40, quota: 700 },
+  { level: 'Semi-Pro', salary: 17000, commissionPerShirt: 40, quota: 600 },
+  { level: 'Star', salary: 15000, commissionPerShirt: 40, quota: 500 },
+  { level: 'Rising Star', salary: 13000, commissionPerShirt: 35, quota: 400 },
+  { level: 'Rookie', salary: 5000, commissionPerShirt: 0, quota: 250 }
+];
+
+// Adjusted logic: show the higher level label, but use the next lower level's calculation if not quota+25
+const calculateCommissionAndSalary = (totalSales) => {
+  for (let i = 0; i < metrics.length; i++) {
+    const { quota } = metrics[i];
+    if (totalSales >= quota) {
+      // If not enough for this level's full reward, use next lower level's calculation
+      if (i < metrics.length - 1 && totalSales < quota + 25) {
+        // Show this level's label, but use next lower level's calculation
+        const lower = metrics[i + 1];
+        return {
+          level: metrics[i].level,
+          salary: lower.salary,
+          commissionPerShirt: lower.commissionPerShirt,
+          quota: lower.quota
+        };
+      }
+      // Otherwise, use this level's calculation
+      return metrics[i];
+    }
+  }
+  // If not matched, return the lowest level
+  return metrics[metrics.length - 1];
+};
+
+const preSalesMap = {
+  'ANTON': 40,
+  'IVY': 195,
+  'JUDY': 26,
+  'LEAH': 26,
+  'SYRUS': 43,
+  'CRYSTAL': 58,
+  'WINRAD': 20
 };
 
 const App = () => {
@@ -34,12 +67,22 @@ const App = () => {
       return;
     }
     const newSales = parseInt(sales, 10);
-    const { level, salary, commissionPerShirt, quota } = calculateCommissionAndSalary(newSales);
-    const totalCommission = newSales >= quota ? newSales * commissionPerShirt : 0;
+    if (isNaN(newSales)) {
+      alert("Sales must be a number.");
+      return;
+    }
+    const upperName = name.trim().toUpperCase();
+    const preSales = preSalesMap[upperName] || 0;
+    const totalSales = newSales + preSales;
+    const { level, salary, commissionPerShirt, quota } = calculateCommissionAndSalary(totalSales);
+    // Only count up to quota for commission
+    const commissionableSales = Math.min(totalSales, quota);
+    const totalCommission = commissionableSales >= quota ? quota * commissionPerShirt : 0;
     const totalIncome = salary + totalCommission;
     const newPlayer = {
-      id: players.length + 1,
-      name,
+      id: Date.now() + Math.random(),
+      name: upperName,
+      preSales,
       sales: newSales,
       level,
       salary,
@@ -55,11 +98,18 @@ const App = () => {
     setPlayers(prev =>
       prev.map(player => {
         if (player.id === id) {
-          const { level, salary, commissionPerShirt, quota } = calculateCommissionAndSalary(newSales);
-          const totalCommission = newSales >= quota ? newSales * commissionPerShirt : 0;
+          const nameToUse = newName !== undefined ? newName.trim().toUpperCase() : player.name;
+          const preSales = preSalesMap[nameToUse] || 0;
+          const totalSales = newSales + preSales;
+          const { level, salary, commissionPerShirt, quota } = calculateCommissionAndSalary(totalSales);
+          // Only count up to quota for commission
+          const commissionableSales = Math.min(totalSales, quota);
+          const totalCommission = commissionableSales >= quota ? quota * commissionPerShirt : 0;
           const totalIncome = salary + totalCommission;
           return {
             ...player,
+            name: nameToUse,
+            preSales,
             sales: newSales,
             level,
             salary,
@@ -67,7 +117,6 @@ const App = () => {
             quota,
             totalCommission,
             totalIncome,
-            ...(newName !== undefined && { name: newName }),
           };
         }
         return player;
@@ -142,13 +191,15 @@ const App = () => {
           </div>
         </div>
       </div>
-      <Leaderboard 
-        players={players} 
-        updateSales={updateSales} 
-        deletePlayer={deletePlayer}
-        showPayout={showPayout} // Pass showPayout state
-        isCollapsed={isCollapsed} // Pass collapse state to Leaderboard
-      />
+      
+        <Leaderboard 
+          players={players} 
+          updateSales={updateSales} 
+          deletePlayer={deletePlayer}
+          showPayout={showPayout} // Pass showPayout state
+          isCollapsed={isCollapsed} // Pass collapse state to Leaderboard
+        />
+     
     </div>
   );
 };
