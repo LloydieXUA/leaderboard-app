@@ -16,6 +16,7 @@ import WINRAD from '../images/WINRAD.jpg';
 import JUDY from '../images/JUDY.jpg';
 import CRYSTAL from '../images/CRYSTAL.jpg';
 import LEAH from '../images/LEAH.jpg';
+import FLOR from '../images/FLOR.jpg';
 
 
 const images = {
@@ -25,7 +26,9 @@ const images = {
   'WINRAD': WINRAD,
   'JUDY': JUDY,
   'CRYSTAL': CRYSTAL,
-  'LEAH': LEAH
+  'LEAH': LEAH,
+  'FLOR': FLOR
+  
 };
 
 const LeaderboardEntry = ({ player, index, updateSales, deletePlayer, showPayout }) => {
