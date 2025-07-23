@@ -47,13 +47,13 @@ const calculateCommissionAndSalary = (totalSales) => {
 };
 
 const preSalesMap = {
-  'ANTON': 40,
-  'IVY': 195,
-  'JUDY': 26,
-  'LEAH': 26,
-  'SYRUS': 43,
-  'CRYSTAL': 58,
-  'WINRAD': 20
+  'ANTON': 0,
+  'IVY': 22,
+  'JUDY': 71,
+  'LEAH': 72,
+  'SYRUS': 0,
+  'CRYSTAL': 0,
+  'WINRAD': 0
 };
 
 const App = () => {
