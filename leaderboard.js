@@ -1,6 +1,6 @@
 // 1. Hardcoded pre-sales values
 const preSales = {
-  ANTON: ,
+  ANTON: 0,
   IVY: 22,
   JUDY: 71,
   LEAH: 72,
