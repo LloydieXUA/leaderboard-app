@@ -17,7 +17,7 @@ const Leaderboard = ({ players, updateSales, deletePlayer, showPayout }) => {
 
   // Only top player with 930+ sales can claim reward
   const handleShowReward = (player) => {
-    setModalMessage(`Congratulations ${player.name}! You won the Honda Click 125cc Fi.`);
+    setModalMessage(`Congratulations ${player.name}! You won the Grand Prize.`);
     setModalVisible(true);
   };
 
@@ -51,8 +51,8 @@ const Leaderboard = ({ players, updateSales, deletePlayer, showPayout }) => {
   const topPlayer = rankedPlayers[0];
   const otherPlayers = rankedPlayers.slice(1);
 
-  // Show Honda Click if total sales (preSales + sales) >= 930
-  const canClaimHonda = topPlayer && topPlayer.totalSales >= 930;
+  // Show Grand Prize Click if total sales (preSales + sales) >= 930
+  const canClaimGrandPrize = topPlayer && topPlayer.totalSales >= 930;
 
   return (
     <div>
@@ -67,12 +67,12 @@ const Leaderboard = ({ players, updateSales, deletePlayer, showPayout }) => {
               deletePlayer={deletePlayer} 
               showPayout={showPayout}
             />
-            {canClaimHonda && (
+            {canClaimGrandPrize && (
               <button 
                 className="claim-reward-button"
                 onClick={() => handleShowReward(topPlayer)}
               >
-                Claim Honda Click 125cc Fi
+                Claim Grand Prize
               </button>
             )}
           </>
