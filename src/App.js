@@ -13,8 +13,8 @@ import './styles/responsive.css';
 
 const metrics = [
   { level: 'Alpha',      salary: 24000, commissionPerShirt: 42, quota: 1225 },
-  { level: 'Elite',      salary: 22000, commissionPerShirt: 40, quota: 1025 },
-  { level: 'Closer',     salary: 21000, commissionPerShirt: 40, quota:  925 },
+  { level: 'Elite',      salary: 22000, commissionPerShirt: 40, quota: 925 },
+  { level: 'Closer',     salary: 21000, commissionPerShirt: 40, quota:  875 },
   { level: 'Pro',        salary: 19000, commissionPerShirt: 40, quota:  825 },
   { level: 'Semi-Pro',   salary: 17000, commissionPerShirt: 40, quota:  725 },
   { level: 'Star',       salary: 15000, commissionPerShirt: 40, quota:  625 },
