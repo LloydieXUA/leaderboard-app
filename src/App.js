@@ -12,14 +12,14 @@ import './styles/modals.css';
 import './styles/responsive.css';
 
 const metrics = [
-  { level: 'Alpha', salary: 24000, commissionPerShirt: 42, quota: 1225 },
-  { level: 'Elite', salary: 22000, commissionPerShirt: 40, quota: 1025 },
-  { level: 'Pro', salary: 21000, commissionPerShirt: 40, quota: 925 },
-  { level: 'Pro', salary: 19000, commissionPerShirt: 40, quota: 825 },
-  { level: 'Semi-Pro', salary: 17000, commissionPerShirt: 40, quota: 725 },
-  { level: 'Star', salary: 15000, commissionPerShirt: 40, quota: 625 },
-  { level: 'Rising Star', salary: 13000, commissionPerShirt: 35, quota: 475 },
-  { level: 'Rookie', salary: 5000, commissionPerShirt: 0, quota: 250 }
+  { level: 'Alpha',      salary: 24000, commissionPerShirt: 42, quota: 1225 },
+  { level: 'Elite',      salary: 22000, commissionPerShirt: 40, quota: 1025 },
+  { level: 'Closer',     salary: 21000, commissionPerShirt: 40, quota:  925 },
+  { level: 'Pro',        salary: 19000, commissionPerShirt: 40, quota:  825 },
+  { level: 'Semi-Pro',   salary: 17000, commissionPerShirt: 40, quota:  725 },
+  { level: 'Star',       salary: 15000, commissionPerShirt: 40, quota:  625 },
+  { level: 'Rising Star',salary: 13000, commissionPerShirt: 35, quota:  475 },
+  { level: 'Rookie',     salary:  5000, commissionPerShirt:  0, quota:  250 }
 ];
 
 // Always show the real level based on exact sales
@@ -27,7 +27,6 @@ const calculateCommissionAndSalary = (totalSales) => {
   for (let i = 0; i < metrics.length; i++) {
     const { quota } = metrics[i];
     if (totalSales >= quota) {
-      // Return this exact level's metrics
       return metrics[i];
     }
   }
@@ -35,15 +34,26 @@ const calculateCommissionAndSalary = (totalSales) => {
   return metrics[metrics.length - 1];
 };
 
+// Helper: computes commission with a 25-shirt deduction once quota is met
+// Commission = max(min(totalSales, quota) - 25, 0) * commissionPerShirt
+const computePayout = (totalSales, quota, commissionPerShirt, salary) => {
+  if (totalSales < quota) {
+    return { totalCommission: 0, totalIncome: salary };
+  }
+  const commissionableAfterDeduction = Math.max(Math.min(totalSales, quota) - 25, 0);
+  const totalCommission = commissionableAfterDeduction * commissionPerShirt;
+  const totalIncome = salary + totalCommission;
+  return { totalCommission, totalIncome };
+};
 
 const preSalesMap = {
-  'FLOR':172,
-  'JUDY': 40
+  'FLOR': 172,
+  'JUDY':  40
 };
 
 const App = () => {
   const [players, setPlayers] = useState([]);
-  const [isCollapsed, setIsCollapsed] = useState(false); // State to toggle collapse
+  const [isCollapsed, setIsCollapsed] = useState(false);
   const [showPayout, setShowPayout] = useState(false);
 
   const addPlayer = useCallback((name, sales) => {
@@ -59,11 +69,10 @@ const App = () => {
     const upperName = name.trim().toUpperCase();
     const preSales = preSalesMap[upperName] || 0;
     const totalSales = newSales + preSales;
+
     const { level, salary, commissionPerShirt, quota } = calculateCommissionAndSalary(totalSales);
-    // Only count up to quota for commission
-    const commissionableSales = Math.min(totalSales, quota);
-    const totalCommission = commissionableSales >= quota ? quota * commissionPerShirt : 0;
-    const totalIncome = salary + totalCommission;
+    const { totalCommission, totalIncome } = computePayout(totalSales, quota, commissionPerShirt, salary);
+
     const newPlayer = {
       id: Date.now() + Math.random(),
       name: upperName,
@@ -86,11 +95,10 @@ const App = () => {
           const nameToUse = newName !== undefined ? newName.trim().toUpperCase() : player.name;
           const preSales = preSalesMap[nameToUse] || 0;
           const totalSales = newSales + preSales;
+
           const { level, salary, commissionPerShirt, quota } = calculateCommissionAndSalary(totalSales);
-          // Only count up to quota for commission
-          const commissionableSales = Math.min(totalSales, quota);
-          const totalCommission = commissionableSales >= quota ? quota * commissionPerShirt : 0;
-          const totalIncome = salary + totalCommission;
+          const { totalCommission, totalIncome } = computePayout(totalSales, quota, commissionPerShirt, salary);
+
           return {
             ...player,
             name: nameToUse,
@@ -138,53 +146,43 @@ const App = () => {
     );
   };
 
-  const togglePayout = () => {
-    setShowPayout(prev => !prev);
-  };
+  const togglePayout = () => setShowPayout(prev => !prev);
 
   return (
     <div className="app">
-      <h1 
-        className={`collapsible-header ${isCollapsed ? 'collapsed' : ''}`} 
+      <h1
+        className={`collapsible-header ${isCollapsed ? 'collapsed' : ''}`}
         onClick={() => setIsCollapsed(prev => !prev)}
       >
         UA TIKTOK LEADERBOARD
       </h1>
+
       <div className={`controls-container ${isCollapsed ? 'collapsed' : ''}`}>
         <div className="controls">
           <div className="top-buttons">
             <AddPlayerForm addPlayer={addPlayer} currentPlayers={players} />
           </div>
           <div className="buttons-container">
-            <button className="action-button" onClick={resetPlayers}>
-              Reset
-            </button>
-            <button className="action-button" onClick={deleteAllPlayers}>
-              Clear
-            </button>
+            <button className="action-button" onClick={resetPlayers}>Reset</button>
+            <button className="action-button" onClick={deleteAllPlayers}>Clear</button>
           </div>
           <div className="sort-buttons">
-            <button className="sort-button" onClick={() => sortPlayers('sales')}>
-              Sort by Sales
-            </button>
-            <button className="sort-button" onClick={() => sortPlayers('name')}>
-              Sort by Name
-            </button>
+            <button className="sort-button" onClick={() => sortPlayers('sales')}>Sort by Sales</button>
+            <button className="sort-button" onClick={() => sortPlayers('name')}>Sort by Name</button>
             <button className="sort-button" onClick={togglePayout}>
               {showPayout ? 'Hide Payout' : 'Show Payout'}
             </button>
           </div>
         </div>
       </div>
-      
-        <Leaderboard 
-          players={players} 
-          updateSales={updateSales} 
-          deletePlayer={deletePlayer}
-          showPayout={showPayout} // Pass showPayout state
-          isCollapsed={isCollapsed} // Pass collapse state to Leaderboard
-        />
-     
+
+      <Leaderboard
+        players={players}
+        updateSales={updateSales}
+        deletePlayer={deletePlayer}
+        showPayout={showPayout}
+        isCollapsed={isCollapsed}
+      />
     </div>
   );
 };
