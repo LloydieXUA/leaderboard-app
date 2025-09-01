@@ -12,13 +12,13 @@ import './styles/modals.css';
 import './styles/responsive.css';
 
 const metrics = [
-  { level: 'Alpha', salary: 24000, commissionPerShirt: 40, quota: 930 },
-  { level: 'Elite', salary: 22000, commissionPerShirt: 40, quota: 850 },
-  { level: 'Closer', salary: 21000, commissionPerShirt: 40, quota: 800 },
-  { level: 'Pro', salary: 19000, commissionPerShirt: 40, quota: 700 },
-  { level: 'Semi-Pro', salary: 17000, commissionPerShirt: 40, quota: 600 },
-  { level: 'Star', salary: 15000, commissionPerShirt: 40, quota: 500 },
-  { level: 'Rising Star', salary: 13000, commissionPerShirt: 35, quota: 400 },
+  { level: 'Alpha', salary: 24000, commissionPerShirt: 42, quota: 1225 },
+  { level: 'Elite', salary: 22000, commissionPerShirt: 40, quota: 1025 },
+  { level: 'Pro', salary: 21000, commissionPerShirt: 40, quota: 925 },
+  { level: 'Pro', salary: 19000, commissionPerShirt: 40, quota: 825 },
+  { level: 'Semi-Pro', salary: 17000, commissionPerShirt: 40, quota: 725 },
+  { level: 'Star', salary: 15000, commissionPerShirt: 40, quota: 625 },
+  { level: 'Rising Star', salary: 13000, commissionPerShirt: 35, quota: 475 },
   { level: 'Rookie', salary: 5000, commissionPerShirt: 0, quota: 250 }
 ];
 
@@ -47,13 +47,8 @@ const calculateCommissionAndSalary = (totalSales) => {
 };
 
 const preSalesMap = {
-  'ANTON': 0,
-  'IVY': 22,
-  'JUDY': 71,
-  'LEAH': 72,
-  'SYRUS': 0,
-  'CRYSTAL': 0,
-  'WINRAD': 0
+  'FLOR':172,
+  'JUDY': 40
 };
 
 const App = () => {
