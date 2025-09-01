@@ -9,23 +9,19 @@ import '../styles/animations.css';
 import '../styles/buttons.css';
 import '../styles/modals.css';
 import '../styles/responsive.css';
-import ANTON from '../images/ANTON.jpg';
 import SYRUS from '../images/SYRUS.jpg';
 import IVY from '../images/IVY.jpg';
 import WINRAD from '../images/WINRAD.jpg';
 import JUDY from '../images/JUDY.jpg';
-import CRYSTAL from '../images/CRYSTAL.jpg';
 import LEAH from '../images/LEAH.jpg';
 import FLOR from '../images/FLOR.jpg';
 
 
 const images = {
-  'ANTON': ANTON,
   'SYRUS': SYRUS,
   'IVY': IVY,
   'WINRAD': WINRAD,
   'JUDY': JUDY,
-  'CRYSTAL': CRYSTAL,
   'LEAH': LEAH,
   'FLOR': FLOR
   
