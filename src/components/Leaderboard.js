@@ -15,7 +15,7 @@ const Leaderboard = ({ players, updateSales, deletePlayer, showPayout }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
 
-  // Only top player with 930+ sales can claim reward
+  // Only top player with 1225+ sales can claim reward
   const handleShowReward = (player) => {
     setModalMessage(`Congratulations ${player.name}! You won the Grand Prize.`);
     setModalVisible(true);
@@ -51,8 +51,8 @@ const Leaderboard = ({ players, updateSales, deletePlayer, showPayout }) => {
   const topPlayer = rankedPlayers[0];
   const otherPlayers = rankedPlayers.slice(1);
 
-  // Show Grand Prize Click if total sales (preSales + sales) >= 930
-  const canClaimGrandPrize = topPlayer && topPlayer.totalSales >= 930;
+  // Show Grand Prize Click if total sales (preSales + sales) >= 1225
+  const canClaimGrandPrize = topPlayer && topPlayer.totalSales >= 1225;
 
   return (
     <div>
