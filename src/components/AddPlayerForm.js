@@ -55,9 +55,7 @@ const AddPlayerForm = ({ addPlayer, currentPlayers }) => {
                 required
             />
             <button type="submit">Add Tiktok Anchor</button>
-            <div style={{ fontSize: '0.9em', color: '#aaa', marginTop: 4 }}>
-                For ANTON, IVY, JUDY, LEAH, SYRUS, CRYSTAL, WINRAD: pre-sales will be auto-added.
-            </div>
+            
         </form>
     );
 };
