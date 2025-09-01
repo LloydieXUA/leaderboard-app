@@ -39,9 +39,9 @@ const LeaderboardEntry = ({ player, index, updateSales, deletePlayer, showPayout
   const [editedSales, setEditedSales] = useState(player.sales);
 
   const getBackgroundColor = () => {
-    if (player.sales >= 930) return 'gold';
-    if (player.sales >= 850) return 'silver';
-    if (player.sales >= 800) return '#cd7f32';
+    if (player.sales >= 1225) return 'gold';
+    if (player.sales >= 1025) return 'silver';
+    if (player.sales >= 925) return '#cd7f32';
     if (index >= 9 && index <= 14) return 'rgba(255, 0, 0, 0.2)';
     return 'transparent';
   };
