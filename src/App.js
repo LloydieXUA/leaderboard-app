@@ -22,29 +22,19 @@ const metrics = [
   { level: 'Rookie', salary: 5000, commissionPerShirt: 0, quota: 250 }
 ];
 
-// Adjusted logic: show the higher level label, but use the next lower level's calculation if not quota+25
+// Always show the real level based on exact sales
 const calculateCommissionAndSalary = (totalSales) => {
   for (let i = 0; i < metrics.length; i++) {
     const { quota } = metrics[i];
     if (totalSales >= quota) {
-      // If not enough for this level's full reward, use next lower level's calculation
-      if (i < metrics.length - 1 && totalSales < quota + 25) {
-        // Show this level's label, but use next lower level's calculation
-        const lower = metrics[i + 1];
-        return {
-          level: metrics[i].level,
-          salary: lower.salary,
-          commissionPerShirt: lower.commissionPerShirt,
-          quota: lower.quota
-        };
-      }
-      // Otherwise, use this level's calculation
+      // Return this exact level's metrics
       return metrics[i];
     }
   }
-  // If not matched, return the lowest level
+  // If no quota reached, return the lowest level
   return metrics[metrics.length - 1];
 };
+
 
 const preSalesMap = {
   'FLOR':172,
